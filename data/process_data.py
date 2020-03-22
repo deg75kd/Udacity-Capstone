@@ -46,13 +46,14 @@ def clean_data(df_lyrics):
 
     return df_lyrics
 
-def save_data(df_lyrics, run_mode):
+def save_data(df_lyrics, run_mode, DATABASE_URL):
     """Saves dataframe to a PostgreSQL database.
     
     Args:
         df_lyrics: Dataframe to be saved
         run_mode: hobby = load only 10,000 rows
                   live = load entire dataframe
+        DATABASE_URL: database connection string
     """
 
     # DATABASE_URL = os.environ['DATABASE_URL']
@@ -65,7 +66,6 @@ def save_data(df_lyrics, run_mode):
                             # 'kd-capstone', 
                             # stdout=subprocess.PIPE)
     # DATABASE_URL = proc.stdout.read()
-    DATABASE_URL ='postgres://ibgwytquyfcsae:a69a7fcd93593ab2cfa8de1a1d29500755d48ec728912be681801bb2b101cb2a@ec2-3-91-112-166.compute-1.amazonaws.com:5432/dk3ib67dg3lj4'
 
     # print(DATABASE_URL)
     # conn = psycopg2.connect(DATABASE_URL, sslmode='require')
@@ -98,9 +98,9 @@ def main():
         run_mode: determines if whole dataframe or part loaded to DB
     """
 
-    if len(sys.argv) == 3:
+    if len(sys.argv) == 4:
 
-        data_filepath, run_mode = sys.argv[1:]
+        data_filepath, run_mode, DATABASE_URL = sys.argv[1:]
 
         print('Loading data from {}...'.format(data_filepath))
         df_lyrics = pd.read_csv(data_filepath, index_col='index')
@@ -110,16 +110,18 @@ def main():
 
         print('Saving data...')
         try:
-            save_data(df_lyrics, run_mode)
+            save_data(df_lyrics, run_mode, DATABASE_URL)
             print('Cleaned data saved to database!')
         except:
             print('ERROR: Data was not saved to the database!')
 
     else:
+        print('You have passed in {} arguments.'.format(len(sys.argv)))
         print('Please provide the filepaths of the lyrics dataset as the '\
-              'first argument and either "hobby" or "live" for the second '\
+              'first argument, either "hobby" or "live" for the second '\
+              'argument and the database connection string for the third '\
               'argument. \n\nExample: python process_data.py lyrics.csv '\
-              'hobby')
+              'hobby postgres://...')
 
 
 if __name__ == '__main__':

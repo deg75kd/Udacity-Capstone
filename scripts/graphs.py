@@ -9,11 +9,12 @@ def loaddata():
     """Loads data from database for analysis
 
     Args:
+        None
 
     Returns:
         df (dataframe): data from database stored in a dataframe
     """
-    DATABASE_URL ='postgres://ibgwytquyfcsae:a69a7fcd93593ab2cfa8de1a1d29500755d48ec728912be681801bb2b101cb2a@ec2-3-91-112-166.compute-1.amazonaws.com:5432/dk3ib67dg3lj4'
+    DATABASE_URL ='postgres://cdqqveihnfjerq:53a6158790143365e9e5a200b95ce7b633664de701f708bce7f07e814945411f@ec2-52-87-58-157.compute-1.amazonaws.com:5432/dbj3abpt1o2c4a'
     engine = create_engine(DATABASE_URL)
     
     selectQuery = "select * from lyrics_table"
@@ -77,7 +78,8 @@ def return_figures():
         )
     )
     # fig.update_layout(title_text = 'Song Counts by Genre')
-    layout_two = dict(title_text = 'Song Counts by Genre')
+    #layout_two = dict(title_text = 'Song Counts by Genre')
+    layout_two = dict(title = 'Song Counts by Genre')
     # fig.show()
 
     # Line graph of song counts by year
@@ -104,7 +106,8 @@ def return_figures():
                       # yaxis = dict(title = 'Songs')
                      # )
     layout_three = dict(
-        title_text = 'Songs by Year',
+        #title_text = 'Songs by Year',
+        title = 'Songs by Year',
         xaxis = dict(title = 'Year'),
         yaxis = dict(title = 'Songs')
     )
@@ -129,7 +132,8 @@ def return_figures():
                 name = genre
             )
         )
-    layout_four = dict(title_text = 'Lyric Lengths by Genre')
+    #layout_four = dict(title_text = 'Lyric Lengths by Genre')
+    layout_four = dict(title = 'Lyric Lengths by Genre')
     # fig.show()
 
     # append all charts to the figures list

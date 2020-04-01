@@ -8,6 +8,7 @@ import io
 import psycopg2
 from sqlalchemy import create_engine
 
+
 def clean_data(df_lyrics):
     """Separates categories in dataframe into different columns.
     
@@ -46,7 +47,7 @@ def clean_data(df_lyrics):
 
     return df_lyrics
 
-def save_data(df_lyrics, run_mode, DATABASE_URL):
+def save_data(df_lyrics, run_mode):
     """Saves dataframe to a PostgreSQL database.
     
     Args:
@@ -54,27 +55,29 @@ def save_data(df_lyrics, run_mode, DATABASE_URL):
         run_mode: hobby = load only 10,000 rows
                   live = load entire dataframe
         DATABASE_URL: database connection string
+
     """
+    # set database connection string
+    try:
+        DATABASE_URL = os.environ['DATABASE_URL']
+        print(DATABASE_URL)
+	    
+    except:
+        print('******************************************************')
+        print('ERROR: The DATABASE_URL variable is not set on the OS.')
+        print('       Cannot connect to the database.')
+        print('******************************************************')
+        return None
 
-    # DATABASE_URL = os.environ['DATABASE_URL']
-    # DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a kd-capstone')
-
-    # proc = subprocess.Popen('heroku',
-                            # 'config:get',
-                            # 'DATABASE_URL',
-                            # '-a',
-                            # 'kd-capstone', 
-                            # stdout=subprocess.PIPE)
-    # DATABASE_URL = proc.stdout.read()
-
-    # print(DATABASE_URL)
     # conn = psycopg2.connect(DATABASE_URL, sslmode='require')
     engine = create_engine(DATABASE_URL)
-
+    print('engine created')
+	
     # df_lyrics.to_sql('lyrics_table', conn, if_exists='replace', index=False)
     # create empty table, or truncate existing table
     df_lyrics.head(0).to_sql('lyrics_table', engine, if_exists='replace', index=False)
-
+    print('empty table created')
+	
     # load table by row
     conn = engine.raw_connection()
     cur = conn.cursor()
@@ -88,6 +91,7 @@ def save_data(df_lyrics, run_mode, DATABASE_URL):
     cur.copy_from(output, 'lyrics_table', null="")
     conn.commit()
 
+    print('Cleaned data saved to database!')
     return None
 
 def main():
@@ -98,9 +102,11 @@ def main():
         run_mode: determines if whole dataframe or part loaded to DB
     """
 
-    if len(sys.argv) == 4:
+    #if len(sys.argv) == 4:
+    if len(sys.argv) == 3:
 
-        data_filepath, run_mode, DATABASE_URL = sys.argv[1:]
+        # data_filepath, run_mode, DATABASE_URL = sys.argv[1:]
+        data_filepath, run_mode = sys.argv[1:]
 
         print('Loading data from {}...'.format(data_filepath))
         df_lyrics = pd.read_csv(data_filepath, index_col='index')
@@ -109,19 +115,14 @@ def main():
         df_lyrics = clean_data(df_lyrics)
 
         print('Saving data...')
-        try:
-            save_data(df_lyrics, run_mode, DATABASE_URL)
-            print('Cleaned data saved to database!')
-        except:
-            print('ERROR: Data was not saved to the database!')
+        save_data(df_lyrics, run_mode)
 
     else:
         print('You have passed in {} arguments.'.format(len(sys.argv)))
         print('Please provide the filepaths of the lyrics dataset as the '\
-              'first argument, either "hobby" or "live" for the second '\
-              'argument and the database connection string for the third '\
+              'first argument and either "hobby" or "live" for the second '\
               'argument. \n\nExample: python process_data.py lyrics.csv '\
-              'hobby postgres://...')
+              'hobby')
 
 
 if __name__ == '__main__':

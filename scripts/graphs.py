@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import plotly.graph_objs as go
 
@@ -14,7 +15,7 @@ def loaddata():
     Returns:
         df (dataframe): data from database stored in a dataframe
     """
-    DATABASE_URL ='postgres://cdqqveihnfjerq:53a6158790143365e9e5a200b95ce7b633664de701f708bce7f07e814945411f@ec2-52-87-58-157.compute-1.amazonaws.com:5432/dbj3abpt1o2c4a'
+    DATABASE_URL = os.environ['DATABASE_URL']
     engine = create_engine(DATABASE_URL)
     
     selectQuery = "select * from lyrics_table"

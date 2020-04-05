@@ -4,6 +4,7 @@ import json, plotly
 from flask import render_template, request
 from scripts.graphs import return_figures
 from scripts.search_song import search_song
+from data.myfunctions import remove_stop_words
 
 @app.route('/')
 @app.route('/index')
@@ -39,16 +40,28 @@ def go():
     # save user input in query
     query = request.args.get('query', '') 
 
-    """watch for stop words - make sure all words not eliminated
-    about, after, all, also, an, and, another, any, are, as, at, be, because, been, before, being, between, both, but, by, came, can, come, could, did, do, does, each, else, for, from, get, got, had, has, have, he, her, here, him, himself, his, how, if, in, into, is, it, its, just, like, make, many, me, might, more, most, much, must, my, never, no, now, of, on, only, or, other, our, out, over, re, said, same, see, should, since, so, some, still, such, take, than, that, the, their, them, then, there, these, they, this, those, through, to, too, under, up, use, very, want, was, way, we, well, were, what, when, where, which, while, who, will, with, would, you, your
+    query_length = remove_stop_words(query)
+    if query_length > 0:
+        results_df = search_song(query)
+	    
+    else:
+        query = 'All the words you entered are identified as stop words by ChartLyrics. The query cannot be executed.'
+        results_df = pd.DataFrame(columns = ['lyric_id', 'lyric_check_sum', 'artist', 'song'])
 
-    """
-
-    # get results
-    results_df = search_song(query)
-
-    # This will render the go.html
     return render_template('go.html', 
-                           query = query, 
+                           query = query,
                            table = results_df
+    )
+
+@app.route('/results')
+def results_page():
+    """
+    """
+    # save user input in query
+    lyricId = request.args.get('lyricId', '')
+    lyricCheckSum = request.args.get('lyricCheckSum', '')
+
+    return render_template('results.html',
+                           lyricId = lyricId,
+                           lyricCheckSum = lyricCheckSum
     )

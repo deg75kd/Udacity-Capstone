@@ -41,15 +41,24 @@
       </div>
     </nav>
 
-    <div class="jumbotron">
-        <div class="container">
-            <h1 class="text-center">Song Lyric Predictor Search Results</h1>
-            <h3 class="text-center">Song - Artist</h1>
-            <p class="text-center">lyricId {{lyricId}}</p>
-            <p class="text-center">lyricCheckSum {{lyricCheckSum}}</p>
-            <hr />
+    <main role="main">
+
+      <!-- Main jumbotron -->
+      <div class="jumbotron">
+          <div class="container">
+              <h1 class="text-center">Song Lyric Predictor Search Results</h1>
+              <hr />
+              <h3 class="text-center">{{song}} - {{artist}}</h3>
+          </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <p>{{lyrics_text}}</p>
         </div>
-    </div>
+      </div> <!-- /container -->
+
+    </main>
 
 </body>
 </html>

@@ -1,5 +1,5 @@
-from myapp import app
 import sys
+from myapp import app
 
 if len(sys.argv) == 2:
     run_location = sys.argv[1]

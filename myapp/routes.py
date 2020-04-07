@@ -2,9 +2,28 @@ from myapp import app
 import pandas as pd
 import json, plotly
 from flask import render_template, request
+from sklearn.externals import joblib
+from nltk.stem import WordNetLemmatizer
+from nltk.tokenize import word_tokenize
+
 from scripts.graphs import return_figures
 from scripts.search_song import search_song
-from data.myfunctions import remove_stop_words
+from scripts.myfunctions import remove_stop_words
+from scripts.song_results import get_song
+
+def tokenize(text):
+    tokens = word_tokenize(text)
+    lemmatizer = WordNetLemmatizer()
+    
+    clean_tokens = []
+    for tok in tokens:
+        clean_tok = lemmatizer.lemmatize(tok).lower().strip()
+        clean_tokens.append(clean_tok)
+        
+    return clean_tokens
+
+# load model
+# model = joblib.load('scripts/classifier.pkl')
 
 @app.route('/')
 @app.route('/index')
@@ -60,8 +79,18 @@ def results_page():
     # save user input in query
     lyricId = request.args.get('lyricId', '')
     lyricCheckSum = request.args.get('lyricCheckSum', '')
+    artist = request.args.get('artist', '')
+    song = request.args.get('song', '')
 
+    lyrics_text = get_song(lyricId, lyricCheckSum)
+    # classification_label = model.predict([lyrics_text])[0]
+
+    # return render_template('results.html',
+                           # lyrics_text = lyrics_text,
+                           # classification_label = classification_label
+    # )
     return render_template('results.html',
-                           lyricId = lyricId,
-                           lyricCheckSum = lyricCheckSum
+                           lyrics_text = lyrics_text,
+                           artist = artist,
+                           song = song
     )

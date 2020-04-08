@@ -1,17 +1,20 @@
 import xml.etree.ElementTree as ET
 import urllib
 from urllib.request import urlopen
+from sklearn.externals import joblib
 
-def tokenize(text):
-    tokens = word_tokenize(text)
-    lemmatizer = WordNetLemmatizer()
+from scripts.myfunctions import tokenize
+
+# def tokenize(text):
+    # tokens = word_tokenize(text)
+    # lemmatizer = WordNetLemmatizer()
     
-    clean_tokens = []
-    for tok in tokens:
-        clean_tok = lemmatizer.lemmatize(tok).lower().strip()
-        clean_tokens.append(clean_tok)
+    # clean_tokens = []
+    # for tok in tokens:
+        # clean_tok = lemmatizer.lemmatize(tok).lower().strip()
+        # clean_tokens.append(clean_tok)
         
-    return clean_tokens
+    # return clean_tokens
 
 def get_song(lyric_id, lyric_check_sum):
     """
@@ -28,14 +31,14 @@ def get_song(lyric_id, lyric_check_sum):
     selected = ET.fromstring(selected_content)
 
     selected_lyrics = selected.find('{http://api.chartlyrics.com/}Lyric').text
-    selected_lyrics = selected_lyrics.replace('\n', ' ')
+    clean_lyrics = selected_lyrics.replace('\n', ' ')
 
-    return selected_lyrics
+    return selected_lyrics, clean_lyrics
 
-#def apply_model(pickle_file, text):
-#    """
-#    """
-#    model = joblib.load(pickle_file)
-#    classification_label = model.predict([selected_lyrics])[0]
-#
-#    return classification_label
+def apply_model(pickle_file, text):
+   """
+   """
+   model = joblib.load(pickle_file)
+   classification_label = model.predict([text])[0]
+
+   return classification_label

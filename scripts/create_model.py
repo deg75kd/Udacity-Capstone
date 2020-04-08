@@ -18,16 +18,18 @@ from sklearn.pipeline import Pipeline, FeatureUnion
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 
-def tokenize(text):
-    tokens = word_tokenize(text)
-    lemmatizer = WordNetLemmatizer()
+from myfunctions import tokenize
+
+# def tokenize(text):
+    # tokens = word_tokenize(text)
+    # lemmatizer = WordNetLemmatizer()
     
-    clean_tokens = []
-    for tok in tokens:
-        clean_tok = lemmatizer.lemmatize(tok).lower().strip()
-        clean_tokens.append(clean_tok)
+    # clean_tokens = []
+    # for tok in tokens:
+        # clean_tok = lemmatizer.lemmatize(tok).lower().strip()
+        # clean_tokens.append(clean_tok)
         
-    return clean_tokens
+    # return clean_tokens
 
 def load_data():
     """

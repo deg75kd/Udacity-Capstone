@@ -48,13 +48,20 @@
           <div class="container">
               <h1 class="text-center">Song Lyric Predictor Search Results</h1>
               <hr />
-              <h3 class="text-center">{{song}} - {{artist}}</h3>
+              <h3 class="text-center">Predicted Genre: {{classification_label}}</h3>
           </div>
       </div>
 
       <div class="container">
         <div class="row">
-          <p>{{lyrics_text}}</p>
+            <h4 class="text-center">"{{song}}" - {{artist}}</h4>
+        </div>
+        <div class="row">
+          <p>
+            {% for para in lyrics_text %}
+                {{para}}<br>
+            {% endfor %}
+          </p>
         </div>
       </div> <!-- /container -->
 

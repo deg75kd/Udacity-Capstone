@@ -1,5 +1,6 @@
 import sys
 from myapp import app
+from scripts.myfunctions import tokenize
 
 if len(sys.argv) == 2:
     run_location = sys.argv[1]

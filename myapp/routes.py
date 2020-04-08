@@ -2,28 +2,29 @@ from myapp import app
 import pandas as pd
 import json, plotly
 from flask import render_template, request
-from sklearn.externals import joblib
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
 from scripts.graphs import return_figures
 from scripts.search_song import search_song
-from scripts.myfunctions import remove_stop_words
-from scripts.song_results import get_song
+from scripts.myfunctions import remove_stop_words, tokenize
+from scripts.song_results import get_song, apply_model
 
-def tokenize(text):
-    tokens = word_tokenize(text)
-    lemmatizer = WordNetLemmatizer()
+# def tokenize(text):
+    # tokens = word_tokenize(text)
+    # lemmatizer = WordNetLemmatizer()
     
-    clean_tokens = []
-    for tok in tokens:
-        clean_tok = lemmatizer.lemmatize(tok).lower().strip()
-        clean_tokens.append(clean_tok)
+    # clean_tokens = []
+    # for tok in tokens:
+        # clean_tok = lemmatizer.lemmatize(tok).lower().strip()
+        # clean_tokens.append(clean_tok)
         
-    return clean_tokens
+    # return clean_tokens
 
 # load model
 # model = joblib.load('scripts/classifier.pkl')
+# pickle_file = "../scripts/classifier.pkl"
+pickle_file = "./scripts/classifier.pkl"
 
 @app.route('/')
 @app.route('/index')
@@ -82,15 +83,14 @@ def results_page():
     artist = request.args.get('artist', '')
     song = request.args.get('song', '')
 
-    lyrics_text = get_song(lyricId, lyricCheckSum)
-    # classification_label = model.predict([lyrics_text])[0]
+    lyrics_text, clean_lyrics = get_song(lyricId, lyricCheckSum)
+    classification_label = apply_model(pickle_file, clean_lyrics)
 
-    # return render_template('results.html',
-                           # lyrics_text = lyrics_text,
-                           # classification_label = classification_label
-    # )
+    lyrics_text = lyrics_text.split('\n')
+
     return render_template('results.html',
                            lyrics_text = lyrics_text,
+                           classification_label = classification_label,
                            artist = artist,
                            song = song
     )

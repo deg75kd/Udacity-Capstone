@@ -11,7 +11,7 @@
     <h2 class="text-center">Query Results</h2>
         {% for index, row in table.iterrows() %}
             <p class="text-center">
-                <a href="/results?lyricId={{ row['lyric_id'] }}&lyricCheckSum={{ row['lyric_check_sum'] }}&artist={{ row['artist'] }}&song={{ row['song'] }}">{{ row['artist'] }} - {{ row['song'] }}</a>
+                <a href="/capstone/results?lyricId={{ row['lyric_id'] }}&lyricCheckSum={{ row['lyric_check_sum'] }}&artist={{ row['artist'] }}&song={{ row['song'] }}">{{ row['artist'] }} - {{ row['song'] }}</a>
             </p>
         {% endfor %}
 {% endblock %}

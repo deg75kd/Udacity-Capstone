@@ -1,21 +1,22 @@
 <!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Udacity DSND Capstone">
+    <meta name="author" content="Kevin DeJesus">
+    <!-- <link rel="icon" href="../../../../favicon.ico"> -->
 
-    <title>Song Lyric Predictor - Category Search</title>
+    <title>Song Lyric Predictor - Udacity DSND Capstone Project</title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="../static/bootstrap.min.css" rel="stylesheet">
 
-</head>
+    <!-- Custom styles for this template -->
+    <link href="../static/jumbotron.css" rel="stylesheet">
+  </head>
 
-<body>
+  <body>
 
     <!--navbar links-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
@@ -52,30 +53,40 @@
       </div>
     </nav>
 
-<div class="jumbotron">
-    <div class="container">
-        <h1 class="text-center">Song Lyric Predictor</h1>
-        <p class="text-center">Find the songs most similar to your favorite song</p>
-        <hr />
-      
+    <main role="main">
+
+      <!-- Main jumbotron -->
+      <div class="jumbotron">
+        <div class="container">
+          <h1 class="display-3">Song Lyric Predictor</h1>
+          <p>This website presents my efforts to categorize song lyrics using Data Science.</p>
+        </div>
+      </div>
+
+      <div class="container">
         <div class="row">
-            <div class="col-lg-12 form-group-lg">
-                <form action="/capstone/go" method="get">
-                    <input type="text" class="form-control form-control-lg" name="query" placeholder="Enter a song name">
-                    <div class="col-lg-offset-5 text-center">
-                        <button type="submit" class="btn btn-lg btn-success">Search</button>
-                    </div>
-                </form>
-            </div>
+          <div class="col-md-4">
+            <h2>Exploratory Data Analysis</h2>
+            <p>Before setting out to categories the song lyrics, I wanted to see what my dataset looked like. </p>
+            <p><a class="btn btn-secondary" href="/capstone/eda" role="button">View details &raquo;</a></p>
+          </div>
+          <div class="col-md-4">
+            <h2>Lyric Categories</h2>
+            <p>Machine learning model. </p>
+            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+          </div>
+          <div class="col-md-4">
+            <h2>Song Lyric Search</h2>
+            <p>Search for a song and use the model to categorize it.</p>
+            <p><a class="btn btn-secondary" href="/capstone/search" role="button">View details &raquo;</a></p>
+          </div>
         </div>
 
-        {% block message %}
-        {% endblock %}
-    </div>
-</div>
+        <hr>
 
-    {% block content %}
-    {% endblock %}
+      </div> <!-- /container -->
+
+    </main>
 
     <footer class="container">
       <p>&copy; Kevin DeJesus 2020</p>
@@ -90,4 +101,3 @@
     <script src="../static/bootstrap.min.js"></script>
   </body>
 </html>
-

@@ -10,20 +10,6 @@ from scripts.search_song import search_song
 from scripts.myfunctions import remove_stop_words, tokenize
 from scripts.song_results import get_song, apply_model
 
-# def tokenize(text):
-    # tokens = word_tokenize(text)
-    # lemmatizer = WordNetLemmatizer()
-    
-    # clean_tokens = []
-    # for tok in tokens:
-        # clean_tok = lemmatizer.lemmatize(tok).lower().strip()
-        # clean_tokens.append(clean_tok)
-        
-    # return clean_tokens
-
-# load model
-# model = joblib.load('scripts/classifier.pkl')
-# pickle_file = "../scripts/classifier.pkl"
 pickle_file = "./scripts/classifier.pkl"
 
 @app.route('/')
@@ -31,7 +17,12 @@ pickle_file = "./scripts/classifier.pkl"
 def jumbotron():
     return render_template('index.html')
 
-@app.route('/eda')
+@app.route('/')
+@app.route('/capstone')
+def capstone():
+    return render_template('capstone.html')
+
+@app.route('/capstone/eda')
 def eda():
     """
 
@@ -48,11 +39,11 @@ def eda():
                            ids=ids,
                            figuresJSON=figuresJSON)
 
-@app.route('/search')
+@app.route('/capstone/search')
 def search_page():
     return render_template('search.html')
 
-@app.route('/go')
+@app.route('/capstone/go')
 def go():
     """Processes search item from user
 
@@ -73,7 +64,7 @@ def go():
                            table = results_df
     )
 
-@app.route('/results')
+@app.route('/capstone/results')
 def results_page():
     """
     """

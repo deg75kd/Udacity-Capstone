@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+import pickle
 import urllib
 from urllib.request import urlopen
 from sklearn.externals import joblib
@@ -34,9 +35,12 @@ def get_song(lyric_id, lyric_check_sum):
     return selected_lyrics, clean_lyrics
 
 def apply_model(pickle_file, text):
-   """
-   """
-   model = joblib.load(pickle_file)
-   classification_label = model.predict([text])[0]
-
-   return classification_label
+    """
+    """
+    # model = joblib.load(pickle_file)
+    file = open(pickle_file, 'rb')
+    model = pickle.load(file)
+    classification_label = model.predict([text])[0]
+    file.close()
+    
+    return classification_label

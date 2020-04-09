@@ -10,7 +10,7 @@ from scripts.search_song import search_song
 from scripts.myfunctions import remove_stop_words, tokenize
 from scripts.song_results import get_song, apply_model
 
-pickle_file = "./scripts/classifier.pkl"
+pickle_file = "./data/classifier.pkl"
 
 @app.route('/')
 @app.route('/index')

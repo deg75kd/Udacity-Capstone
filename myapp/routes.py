@@ -1,16 +1,20 @@
 from myapp import app
 import pandas as pd
 import json, plotly
+import pickle
 from flask import render_template, request
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
 from scripts.graphs import return_figures
 from scripts.search_song import search_song
-from scripts.myfunctions import remove_stop_words, tokenize
+from scripts.myfunctions import remove_stop_words
 from scripts.song_results import get_song, apply_model
 
 pickle_file = "./data/classifier.pkl"
+# file = open(pickle_file, 'rb')
+# model = pickle.load(file)
+# file.close()
 
 @app.route('/')
 @app.route('/index')
@@ -76,6 +80,7 @@ def results_page():
 
     lyrics_text, clean_lyrics = get_song(lyricId, lyricCheckSum)
     classification_label = apply_model(pickle_file, clean_lyrics)
+    # classification_label = model.predict([clean_lyrics])[0]
 
     lyrics_text = lyrics_text.split('\n')
 

@@ -18,7 +18,7 @@ from sklearn.pipeline import Pipeline, FeatureUnion
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 
-from scripts.myfunctions import tokenize
+from myfunctions import tokenize
 # def tokenize(text):
     # tokens = word_tokenize(text)
     # lemmatizer = WordNetLemmatizer()
@@ -53,8 +53,13 @@ def main():
 	    
         X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
 	    
+        # pipeline = Pipeline([
+            # ('vect', CountVectorizer(tokenizer = tokenize)),
+            # ('tfidf', TfidfTransformer()),
+            # ('clf', RandomForestClassifier())
+        # ])
         pipeline = Pipeline([
-            ('vect', CountVectorizer(tokenizer = tokenize)),
+            ('vect', CountVectorizer(tokenizer = None)),
             ('tfidf', TfidfTransformer()),
             ('clf', RandomForestClassifier())
         ])

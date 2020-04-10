@@ -4,7 +4,7 @@ import urllib
 from urllib.request import urlopen
 from sklearn.externals import joblib
 
-from scripts.myfunctions import tokenize
+# from myfunctions import tokenize
 # def tokenize(text):
     # tokens = word_tokenize(text)
     # lemmatizer = WordNetLemmatizer()

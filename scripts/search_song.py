@@ -9,6 +9,7 @@ from sklearn.externals import joblib
 
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
+from scripts.myfunctions import tokenize
 
 def search_song(song_name):
     """Use ChartLyrics API to find song matches

@@ -5,16 +5,17 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 
-def tokenize(text):
-    tokens = word_tokenize(text)
-    lemmatizer = WordNetLemmatizer()
+from scripts.myfunctions import tokenize
+# def tokenize(text):
+    # tokens = word_tokenize(text)
+    # lemmatizer = WordNetLemmatizer()
     
-    clean_tokens = []
-    for tok in tokens:
-        clean_tok = lemmatizer.lemmatize(tok).lower().strip()
-        clean_tokens.append(clean_tok)
+    # clean_tokens = []
+    # for tok in tokens:
+        # clean_tok = lemmatizer.lemmatize(tok).lower().strip()
+        # clean_tokens.append(clean_tok)
         
-    return clean_tokens
+    # return clean_tokens
 
 if len(sys.argv) == 2:
     run_location = sys.argv[1]

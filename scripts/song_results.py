@@ -4,16 +4,17 @@ import urllib
 from urllib.request import urlopen
 from sklearn.externals import joblib
 
-def tokenize(text):
-    tokens = word_tokenize(text)
-    lemmatizer = WordNetLemmatizer()
+from scripts.myfunctions import tokenize
+# def tokenize(text):
+    # tokens = word_tokenize(text)
+    # lemmatizer = WordNetLemmatizer()
     
-    clean_tokens = []
-    for tok in tokens:
-        clean_tok = lemmatizer.lemmatize(tok).lower().strip()
-        clean_tokens.append(clean_tok)
+    # clean_tokens = []
+    # for tok in tokens:
+        # clean_tok = lemmatizer.lemmatize(tok).lower().strip()
+        # clean_tokens.append(clean_tok)
         
-    return clean_tokens
+    # return clean_tokens
 
 def get_song(lyric_id, lyric_check_sum):
     """

@@ -32,6 +32,14 @@ from myfunctions import tokenize
 
 def main():
     """
+
+    Args (command-line arguments):
+        model_file: file to save machine learning model
+        cnf_matrix_file: file to save confusion matrix as dataframe
+        cls_report_file: file to save classification report
+
+    Returns:
+        None
     """
     if len(sys.argv) == 4:
         model_file, cnf_matrix_file, cls_report_file = sys.argv[1:]

@@ -17,7 +17,15 @@ from sklearn.externals import joblib
     # return clean_tokens
 
 def get_song(lyric_id, lyric_check_sum):
-    """
+    """Use ChartLyrics API to get lyrics for selected song
+
+    Args:
+        lyric_id (int): ID number for selected song
+        lyric_check_sum (string): check sum value for selected song
+
+    Returns:
+        selected_lyrics (string): lyrics as returned by API
+        clean_lyrics (string): lyrics with newline characters removed
     """
     base_lyric_url = 'http://api.chartlyrics.com/apiv1.asmx/GetLyric?'
     qs_args = {
@@ -36,7 +44,14 @@ def get_song(lyric_id, lyric_check_sum):
     return selected_lyrics, clean_lyrics
 
 def apply_model(pickle_file, text):
-    """
+    """Apply the classification model to the lyrics of the selected song
+
+    Args:
+        pickle_file (string): path for the classification's pickled model
+        text (string): lyrics of the selected song
+
+    Returns:
+        classification_label (string): predicted label
     """
     # model = joblib.load(pickle_file)
     file = open(pickle_file, 'rb')

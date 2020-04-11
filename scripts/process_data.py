@@ -54,8 +54,9 @@ def save_data(df_lyrics, run_mode):
         df_lyrics: Dataframe to be saved
         run_mode: hobby = load only 10,000 rows
                   live = load entire dataframe
-        DATABASE_URL: database connection string
 
+    Returns:
+        None
     """
     # set database connection string
     DATABASE_URL = os.environ['DATABASE_URL']
@@ -89,6 +90,9 @@ def main():
     Args (command-line):
         data_filepath: CSV file of lyrics
         run_mode: determines if whole dataframe or part loaded to DB
+
+    Returns:
+        None
     """
 
     #if len(sys.argv) == 4:

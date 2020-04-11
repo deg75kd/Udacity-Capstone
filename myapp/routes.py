@@ -11,24 +11,44 @@ from scripts.search_song import search_song
 from scripts.myfunctions import remove_stop_words
 from scripts.song_results import get_song, apply_model
 
-pickle_file = "./data/classifier.pkl"
-# file = open(pickle_file, 'rb')
-# model = pickle.load(file)
-# file.close()
+model_pkl = "./data/classifier.pkl"
+cnf_matrix_pkl = "./data/cnf_df.pkl"
+cls_report_pkl = "./data/cls_report.pkl"
 
 @app.route('/')
 @app.route('/index')
 def jumbotron():
+    """Render the main portfolio page
+
+    Args:
+        None
+
+    Returns:
+        index.html page
+    """
     return render_template('index.html')
 
 @app.route('/capstone')
 def capstone():
+    """Render the main page for the capstone project
+
+    Args:
+        None
+
+    Returns:
+        capstone.html page
+    """
     return render_template('capstone.html')
 
 @app.route('/capstone/eda')
 def eda():
-    """
+    """Render the page for exploratory data analysis
 
+    Args:
+        None
+
+    Returns:
+        eda.html page
     """
     figures = return_figures()
 
@@ -44,12 +64,25 @@ def eda():
 
 @app.route('/capstone/search')
 def search_page():
+    """Render the page to search for songs
+
+    Args:
+        None
+
+    Returns:
+        search.html page
+    """
     return render_template('search.html')
 
 @app.route('/capstone/go')
 def go():
     """Processes search item from user
 
+    Args:
+        None
+
+    Returns:
+        go.html page
     """
     # save user input in query
     query = request.args.get('query', '') 
@@ -69,7 +102,13 @@ def go():
 
 @app.route('/capstone/results')
 def results_page():
-    """
+    """Render the page with the search results
+
+    Args:
+        None
+
+    Returns:
+        results.html page
     """
     # save user input in query
     lyricId = request.args.get('lyricId', '')
@@ -78,7 +117,7 @@ def results_page():
     song = request.args.get('song', '')
 
     lyrics_text, clean_lyrics = get_song(lyricId, lyricCheckSum)
-    classification_label = apply_model(pickle_file, clean_lyrics)
+    classification_label = apply_model(model_pkl, clean_lyrics)
     # classification_label = model.predict([clean_lyrics])[0]
 
     lyrics_text = lyrics_text.split('\n')

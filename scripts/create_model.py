@@ -33,8 +33,8 @@ from myfunctions import tokenize
 def main():
     """
     """
-    if len(sys.argv) == 2:
-        pickle_file = sys.argv[1]
+    if len(sys.argv) == 4:
+        model_file, cnf_matrix_file, cls_report_file = sys.argv[1:]
     
         # set database connection string
         DATABASE_URL = os.environ['DATABASE_URL']
@@ -49,6 +49,7 @@ def main():
         genre_names = lyrics_df.groupby('genre').size().index.tolist()
 	    
         X = lyrics_df['lyrics']
+        # X = lyrics_df['lyrics'].apply(tokenize)
         Y = lyrics_df['genre']
 	    
         X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
@@ -59,7 +60,7 @@ def main():
             # ('clf', RandomForestClassifier())
         # ])
         pipeline = Pipeline([
-            ('vect', CountVectorizer(tokenizer = None)),
+            ('vect', CountVectorizer(tokenizer = None, stop_words='english')),
             ('tfidf', TfidfTransformer()),
             ('clf', RandomForestClassifier())
         ])
@@ -78,18 +79,36 @@ def main():
         )
         cv.fit(X_train, Y_train)
 	    
-        Y_pred = cv.predict(X_test)
-        print(classification_report(Y_test, Y_pred))
-
         # export model
-        pickle_write = open(pickle_file, 'wb')
-        pickle.dump(cv, pickle_write)
-        print('Model saved to {}'.format(pickle_file))
+        model_pkl = open(model_file, 'wb')
+        pickle.dump(cv, model_pkl)
+        model_pkl.close()
+        print('Model saved to {}'.format(model_file))
+
+        # save confusion matrix
+        Y_pred = cv.predict(X_test)
+        cnf_matrix = confusion_matrix(Y_test, Y_pred)
+        cnf_matrix_df = pd.DataFrame(data = cnf_matrix,
+                                     index = genre_names,
+                                     columns = genre_names)
+        cnf_matrix_pkl = open(cnf_matrix_file, 'wb')
+        pickle.dump(cnf_matrix, cnf_matrix_pkl)
+        cnf_matrix_pkl.close()
+        print('\nConfusion matrix saved to {}'.format(cnf_matrix_file))
+        
+        # save classification report
+        cls_report = classification_report(Y_test, Y_pred)
+        cls_report_pkl = open(cls_report_file, 'wb')
+        pickle.dump(cls_report, cls_report_pkl)
+        cls_report_pkl.close()
+        print('\nConfusion matrix saved to {}'.format(cls_report_file))
 
     else:
         print('You have passed in {} arguments.'.format(len(sys.argv)))
-        print('Please provide the name of the pickle file to save.\n'\
-              'Example: python create_model.py data/classifier.pkl')
+        # print('Please provide the name of the pickle file to save.\n'\
+              # 'Example: python create_model.py data/classifier.pkl')
+        print('Please provide the name of the pickle files to save.\n'\
+              'Example: python create_model.py data/classifier.pkl data/cnf_df.pkl data/cls_report.pkl')
 
 
 if __name__ == '__main__':

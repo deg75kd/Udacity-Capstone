@@ -21,7 +21,6 @@ pickle_file = "./data/classifier.pkl"
 def jumbotron():
     return render_template('index.html')
 
-@app.route('/')
 @app.route('/capstone')
 def capstone():
     return render_template('capstone.html')

@@ -23,6 +23,7 @@ def search_song(song_name):
     base_url = 'http://api.chartlyrics.com/apiv1.asmx/SearchLyricText?'
     qs_args = {'lyricText': song_name}
     search_url = base_url + urllib.parse.urlencode(qs_args)
+    print(search_url)
 
     response = urllib.request.urlopen(search_url)
     content = response.read().decode('ascii')

@@ -17,18 +17,18 @@ model_pkl = "./data/classifier.pkl"
 cnf_matrix_pkl = "./data/cnf_df.pkl"
 cls_report_pkl = "./data/cls_report.pkl"
 
-@app.route('/')
-@app.route('/index')
-def jumbotron():
-    """Render the main portfolio page
+# @app.route('/')
+# @app.route('/index')
+# def jumbotron():
+    # """Render the main portfolio page
 
-    Args:
-        None
+    # Args:
+        # None
 
-    Returns:
-        index.html page
-    """
-    return render_template('index.html')
+    # Returns:
+        # index.html page
+    # """
+    # return render_template('index.html')
 
 @app.route('/capstone')
 def capstone():
@@ -131,6 +131,7 @@ def go():
     query = request.args.get('query', '') 
 
     query_length = remove_stop_words(query)
+    # print('Query length: {}'.format(query_length))
     if query_length > 0:
         results_df = search_song(query)
 	    

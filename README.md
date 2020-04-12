@@ -16,74 +16,101 @@ This project presents my efforts to categorize song lyrics using Data Science.  
 
 ## File Descriptions
 
-* ChartLyrics API.ipynb
-* Genius API.ipynb
-* Lyrics EDA.ipynb
-* Lyrics Graphs.ipynb
-* Lyrics ML.ipynb
-* Lyrics Model.ipynb
-* myapp.py
-* myapp-win.py
-* nltk.txt
-* Procfile
-* requirements.txt
+* ChartLyrics API.ipynb - Using ChartLyrics API
+* Genius API.ipynb - Using Genius API
+* Lyrics EDA.ipynb - Exploratory data analysis
+* Lyrics Graphs.ipynb - Creating EDA graphs
+* Lyrics ML.ipynb - Creating the machine learning model
+* Lyrics Model.ipynb - Viewing results of the ML model
+* myapp.py - Runs the web page server
+* nltk.txt - Installs NLTK punkt package on Heroku
+* Procfile - Indicates use of gunicorn on Heroku
+* requirements.txt - Package requirements to be installed on Heroku
 
-* data/classifier.pkl
-* data/cls_report.pkl
-* data/cnf_df.pkl
-* data/lyrics.csv
+* data/classifier.pkl - Machine learning model
+* data/cls_report.pkl - Classification report
+* data/cnf_df.pkl - Confusion matrix
+* data/lyrics.csv - CSV with original data
 
-* myapp/__init__.py - Runs the web application
-* myapp/routes.py - 
+* myapp/__init__.py - Runs the Flask web application
+* myapp/routes.py - Renders the web pages
+* myapp/static/* - CSS and JavaScript files for the Bootstrap template
+* myapp/templates/capstone.html - Home web page for the capstone project
+* myapp/templates/eda.html - Web page discussing exploratory data analysis
 * myapp/templates/go.html - Web page called when a search is executed
-* myapp/templates/master.html - Home web page; also performs some data analysis
-* models/classifier.pkl - Pickle file; output of train_classifier.py
-* models/train_classifier.py - Trains and tests classification model
+* myapp/templates/mldata.html - Web page discussing the machine learning model
+* myapp/templates/results.html - Web page that displays the results of the user search
+* myapp/templates/search.html - Web page that allows user to search for a song
+
+* scripts/create_model.py - Creates the machine learning model
+* scripts/graphs.py - Creates the EDA graphs
+* scripts/ml_graphs.py - Creates the machine learning graph
+* scripts/myfunctions.py - Functions called from other scripts
+* scripts/process_data.py - Pulls data from the CSV, cleans it and saves to a PostgreSQL database
+* scripts/search_song.py - Performs user search for a song
+* scripts/song_results.py - Applys the ML model to the search
 
 ## Prerequisites
 
-Flask 0.12.4\
-gunicorn 19.9.0\
-itsdangerous 0.24\
+Flask 1.1.1\
+gunicorn 20.0.4\
+itsdangerous 1.1.0\
 Jinja2 2.10\
+joblib 0.14.1\
 json\
-nltk 3.2.5\
-numpy 1.12.1\
-pandas 0.23.3\
-pickle 0.7.4\
-plotly 2.0.15\
+MarkupSafe 1.1.1\
+nltk 3.4.5\
+numpy 1.18.1\
+pandas 0.25.3\
+pickle 0.7.5\
+plotly 2.7.0\
+psycopg2 2.8.4\
 python 3.6\
-scikit-learn 0.19.1\
-SQLAlchemy 1.2.18\
-SQLite3\
+requests 2.22.0\
+scikit-learn 0.22.1\
+SQLAlchemy 1.3.12\
+urllib3 1.25.7\
+Werkzeug 0.16.0\
 
 ## Running the Code
 
-First, you have to execute the ETL pipeline that cleans data and stores it in a SQLite database.
+First you need to set the connection string for the PostgreSQL database that is hosted on Heroku. This is specific to each database.
 ```
-python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
+set DATABASE_URL=postgres://...
 ```
 
-Next, you have to run the machine learning pipeline that trains the classifier and saves it as a pickle file.
+Then you have to execute the ETL pipeline that cleans data and stores it in a PostgreSQL database on Heroku.  This takes 2 parameters:
+1) The location of the CSV file
+2) "hobby" to limit the output to 10,000 rows, or "live" to load the entire dataset
 ```
-python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
+python scripts\process_data.py data\lyrics.csv [hobby | live]
+```
+
+Next, you have to run the machine learning pipeline that trains the classifier and saves it as a pickle file.  This accepts 3 parameters for the location of the pickle files to save.
+```
+python scripts/create_model.py data/classifier.pkl data/cnf_df.pkl data/cls_report.pkl
 ```
 
 Finally, to start the web application, run this.
 ```
-python run.py
+python myapp.py win
+```
+On a Windows system waitress is required. Then add a parameter to the command.
+```
+python myapp.py win
 ```
 
 ## Results
 
-Over half of the messages are catgorized as "related", while just shy of half fall into the genre of news.  With the categories, each message can be classified into multiple categories.  If we then look at the number of categories each message falls into, there is an almost logarithmic decline.  Most messages don't fit into any category, and very few fit into more than ten.  There is a massive drop-off at two categories.  Based on the rest of the graph, this might deserve more investigation.
-
-As for the classification model, testing reveals the average f1-score of most categories to be at 0.9 or higher.
+Due to the skew of the dataset the vast majority of tests are predicted to be in the Rock genre.  Thus, the overall accuracy is not that good.  Hip-Hop and Rock are the only genres where the F1-score is above 0.5.  However, due to the huge number of Rock songs in the dataset the overall accuracy is also just over 0.5.  I suspect applying this to real world data, where the Rock genre is not as heavily represented, would produce less promising results.
 
 ## Built With
 
-* [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/#starter-template) - The web framework used
+* [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/#starter-template) - CSS framework
 * [Plotly](https://cdn.plot.ly/plotly-latest.min.js) - API for generating graphs
+* [Flask](https://flask.palletsprojects.com/en/1.1.x/) - Python-based Web framework
+* [Heroku]() - Web hosting service
+* [ChartLyrics]() - API for getting song lyrics
 
 ## License
 

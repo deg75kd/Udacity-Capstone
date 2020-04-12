@@ -8,7 +8,7 @@ from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
 from scripts.graphs import return_figures
-from scripts.ml_graphs import get_model_data, return_ml_figures
+from scripts.ml_graphs import return_ml_figures
 from scripts.search_song import search_song
 from scripts.myfunctions import remove_stop_words
 from scripts.song_results import get_song, apply_model

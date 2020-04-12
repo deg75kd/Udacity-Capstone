@@ -1,18 +1,6 @@
 import pickle
 import plotly.graph_objs as go
 
-def get_model_data():
-    """
-
-    Args:
-        
-
-    Returns:
-        
-    """
-        
-    return df
-
 def return_ml_figures(cnf_matrix_pkl):
     """Creates plotly visualization
 

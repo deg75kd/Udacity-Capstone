@@ -109,7 +109,7 @@ def main():
         cls_report_pkl = open(cls_report_file, 'wb')
         pickle.dump(cls_report, cls_report_pkl)
         cls_report_pkl.close()
-        print('\nConfusion matrix saved to {}'.format(cls_report_file))
+        print('\nClassification report saved to {}'.format(cls_report_file))
 
     else:
         print('You have passed in {} arguments.'.format(len(sys.argv)))

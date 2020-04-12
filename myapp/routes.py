@@ -1,4 +1,5 @@
 from myapp import app
+import numpy as np
 import pandas as pd
 import json, plotly
 import pickle
@@ -7,6 +8,7 @@ from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
 from scripts.graphs import return_figures
+from scripts.ml_graphs import get_model_data, return_ml_figures
 from scripts.search_song import search_song
 from scripts.myfunctions import remove_stop_words
 from scripts.song_results import get_song, apply_model
@@ -61,6 +63,47 @@ def eda():
     return render_template('eda.html',
                            ids=ids,
                            figuresJSON=figuresJSON)
+
+@app.route('/capstone/mldata')
+def mldata():
+    """Render the page for exploratory data analysis
+
+    Args:
+        None
+
+    Returns:
+        mldata.html page
+    """
+    # load ML model
+    file = open(model_pkl, 'rb')
+    model = pickle.load(file)
+    file.close()
+
+    best_score = np.round(model.best_score_, 3)
+    refit_time = np.round(model.refit_time_ / 60, 0)
+    # cv_results_df = pd.DataFrame(model.cv_results_)
+
+    # load classification report
+    file = open(cls_report_pkl, 'rb')
+    cls_report = pickle.load(file)
+    file.close()
+
+    # call script to generate graphs
+    figures = return_ml_figures(cnf_matrix_pkl)
+
+    # plot ids for the html id tag
+    ids = ['figure-{}'.format(i) for i, _ in enumerate(figures)]
+
+    # Convert the plotly figures to JSON for javascript in html template
+    figuresJSON = json.dumps(figures, cls=plotly.utils.PlotlyJSONEncoder)
+
+    return render_template('mldata.html',
+                           ids=ids,
+                           figuresJSON=figuresJSON,
+                           best_score = best_score,
+                           refit_time = refit_time,
+                           cls_report = cls_report
+    )
 
 @app.route('/capstone/search')
 def search_page():

@@ -62,32 +62,57 @@
 
       <!-- Main jumbotron -->
       <div class="jumbotron">
+          <!--chart descriptions-->       
           <div class="container">
-              <h1 class="text-center display-4">Search Results</h1>
-              <hr />
-              <h3 class="text-center">Predicted Genre: {{classification_label}}</h3>
+            <h1 class="display-4">Machine Learning Model Data</h1>
+            <p>To create the machine learning model I first created a GridSearchCV pipeline using CountVectorizer, TfidfTransformer and RandomForestClassifier from the scikit-learn Python package.  CountVectorizer converts a collection of text documents to a matrix of token counts.  TfidfTransformer then transforms that to a normalized tf-idf representation, where tf-idf means term-frequency times inverse document-frequency.  This weights the text of each song lyrics against the total collection.  Finally, RandomForestClassifier was used to create the prediction model using the tf-idf data.</p>
+            <p>For the parameters I only used one parameter for each package and only two options for each of those.  Initially I was testing using a small 10,000 row subset of the data.  The model was usually created within 8 minutes.  However, when I plugged in the full dataset, this process ran for over 15 hours.  Thus, with my processing and time limitations I have chosen not to explore additional parameters.</p>
+            <p>After the model was trained, I created and saved a confusion matrix and classification report.  Then I saved everything to pickle files for easy retrieval upon request by a user.</p>
+            <p>I believe there are several issues that have prevented the model from being more accurate.  First, the dataset is heavily skewed toward the Rock genre as well as for the years 2006-2007.  It's very likely that the topics covered by Rock songs of the 1970s or 1990s are not well reflected by that timeframe.  The second issues is the size of the dataset.  As mentioned above, when I ran the model against the full dataset, the run time became impractical for multiple runs.  On an enterprise system I might have access to more resources to allow for multiple executions.</p>
           </div>
       </div>
+        
+        <!--data-->       
+        <div class="container">
+            <div class="row">
+                <h5>Classficiation Report</h5>
+            </div>
+            <div class="row">
+                <p>
+                  <pre>{{ cls_report }}</pre>
+                </p>
+            </div>
+            <div class="row">
+                <p></p>
+            </div>
 
-      <div class="container">
-        <div class="row">
-            <h4 class="text-center">"{{song}}" - {{artist}}</h4>
+        <!--confusion matrix-->
+            <div class="row">
+                <h5>Confusion Matrix for Classfication Model</h5>
+            </div>
+            <div class="row">
+                <div id="{{ids[0]}}"></div>
+            </div>
         </div>
-        <div class="row">
-          <p>
-            {% for para in lyrics_text %}
-                {{para}}<br>
-            {% endfor %}
-          </p>
-        </div>
-      </div> <!-- /container -->
 
     </main>
 
+    <!--footer section-->               
     <footer class="container">
-      <hr />
       <p>&copy; Kevin DeJesus 2020</p>
     </footer>
+
+    <script type="text/javascript">
+        // plots the figure with id
+        // id much match the div id above in the html
+        var figures = {{figuresJSON | safe}};
+        var ids = {{ids | safe}};
+        for(var i in figures) {
+            Plotly.plot(ids[i],
+                figures[i].data,
+                figures[i].layout || {});
+        }
+    </script>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -96,5 +121,6 @@
     <script>window.jQuery || document.write('<script src="../static/jquery-slim.min.js"><\/script>')</script>
     <script src="../static/popper.min.js"></script>
     <script src="../static/bootstrap.min.js"></script>
-  </body>
+
+</body>
 </html>

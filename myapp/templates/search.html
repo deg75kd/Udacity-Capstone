@@ -1,19 +1,25 @@
 <!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Udacity DSND Capstone">
+    <meta name="author" content="Kevin DeJesus">
+    <!-- <link rel="icon" href="../../../../favicon.ico"> -->
 
-    <title>Song Lyric Predictor - Category Search</title>
+    <title>Song Lyric Predictor - Udacity DSND Capstone Project</title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="../static/bootstrap.min.css" rel="stylesheet">
 
-</head>
+    <!-- Custom styles for this template -->
+    <link href="../static/jumbotron.css" rel="stylesheet">
+
+    <!--import script files needed from plotly and bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
 
 <body>
 
@@ -33,7 +39,7 @@
             <a class="nav-link" href="/capstone/eda">Exploratory Data Analysis</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#">Lyric Categories</a>
+            <a class="nav-link" href="/capstone/mldata">ML Data</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="/capstone/search">Song Lyric Search</a>
@@ -54,9 +60,9 @@
 
 <div class="jumbotron">
     <div class="container">
-        <h1 class="text-center">Song Lyric Predictor</h1>
-        <p class="text-center">Search for your favorite song to see what genre the machine learning model thinks it is.</p>
-        <p class="text-left text-muted">Due to restrictions with the site that hosts the lyrics this search is done at the lyrics level.  This means it may not return the song you want, even if you enter the exact name.  If that happens, try to search using the first line or a line from the chorus.</p>
+        <h1 class="display-4">Song Lyric Search</h1>
+        <p class="text-left">Search for your favorite song to see what genre the machine learning model thinks it is.</p>
+        <p class="text-left text-muted">Due to restrictions with the site that hosts the lyrics this search is done by the text of the lyrics.  This means it may not return the song you want, even if you enter the exact song name.  If that happens, try to search using the first line or a line from the chorus.</p>
         <hr />
       
         <div class="row">
@@ -69,14 +75,13 @@
                 </form>
             </div>
         </div>
-
-        {% block message %}
-        {% endblock %}
     </div>
 </div>
 
-    {% block content %}
-    {% endblock %}
+    <div class="container">
+{% block content %}
+{% endblock %}
+    </div>
 
     <footer class="container">
       <hr />

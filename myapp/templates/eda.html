@@ -1,22 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Udacity DSND Capstone">
+    <meta name="author" content="Kevin DeJesus">
+    <!-- <link rel="icon" href="../../../../favicon.ico"> -->
 
-<html>
+    <title>Song Lyric Predictor - Udacity DSND Capstone Project</title>
 
-<head>
+    <!-- Bootstrap core CSS -->
+    <link href="../static/bootstrap.min.css" rel="stylesheet">
 
-<title>Song Lyric Predictor - Udacity DSND Capstone Project</title>
+    <!-- Custom styles for this template -->
+    <link href="../static/jumbotron.css" rel="stylesheet">
 
-<!--import script files needed from plotly and bootstrap-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!--import script files needed from plotly and bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
 
-</head>
-
-<body>
-
+  <body>
     <!--navbar links-->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
       <a class="navbar-brand" href="/capstone">Song Lyric Predictor</a>
@@ -33,7 +38,7 @@
             <a class="nav-link" href="/capstone/eda">Exploratory Data Analysis</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#">Lyric Categories</a>
+            <a class="nav-link" href="/capstone/mldata">ML Data</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="/capstone/search">Song Lyric Search</a>
@@ -52,19 +57,19 @@
       </div>
     </nav>
 
-<!--middle section-->       
-<div class="row">
+    <main role="main">
 
-    <!--visualizations column-->        
-    <div class="col-12">
-
-        <!--chart descriptions-->       
-        <div id="middle-info" class="mt-3">
-
-            <h2 id="tag-line">Song Lyric Predictor</h2>
-            <h4 id="tag-line" class="text-muted">Udacity DSND Capstone Project</h4>
-            
-        </div>
+      <!-- Main jumbotron -->
+      <div class="jumbotron">
+          <!--chart descriptions-->       
+          <div class="container">
+            <h1 class="display-4">Exploratory Data Analysis</h1>
+            <p>First, I wanted to see which artists had the most songs in the data collection.  I was surprised to find several older artists, such as The Bee Gees, represented so well.  The top ten artists represent a fair cross-section of genres, decades and popularity.</p>
+            <p>Second, I wanted to examine the song numbers by genre.  This one resulted in the first red flag.  Despite its dwindling popularity over the past decade the Rock genre is very heavily represented in our dataset.  In fact it has over 2 1/2 times as many songs as the second largest genre.  Others, meanwhile, are very poorly represented.  This was the first indication that it may be difficult to produce a good model.</p>
+            <p>Next I wanted to see a breakdown of the distribution of release years.  This one turned out to be a huge cause for concern.  More than half of the songs fall within a two year period, 2006-2007.  The subjects covered by popular songs will likely have changed over the years.  With the dataset so heavily skewed it would likely not be representative of previous eras.  Another possibility is that the year data is not accurate.  In that case this may not be a big problem.</p>
+            <p>Finally I was interested to see how the genres compared in terms of number of words per song.  It is well-known that some genres, like Hip-Hop, are word-heavy.  On the other hand genres like Jazz and Electronic often have few words.  While the median word count for Hip-Hop is significantly higher than all other genres, the others are closely grouped together.  That results caused me to rule out using word count as a parameter in the machine learning model.</p>
+          </div>
+      </div>
         
         <!--charts-->       
         <div id="charts" class="container mt-3 text-center">
@@ -98,19 +103,12 @@
             </div>
         
         </div>
-    <div>
-</div>
 
-<!--footer section-->               
-<div id="footer" class="container"></div>
+    </main>
 
-</body>
-
-
-<footer>
-
-    <hr />
-    <p>&copy; Kevin DeJesus 2020</p>
+    <footer class="container">
+      <p>&copy; Kevin DeJesus 2020</p>
+    </footer>
 
     <script type="text/javascript">
         // plots the figure with id
@@ -124,7 +122,12 @@
         }
     </script>
 
-</footer>
-
-
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../static/jquery-slim.min.js"><\/script>')</script>
+    <script src="../static/popper.min.js"></script>
+    <script src="../static/bootstrap.min.js"></script>
+  </body>
 </html>

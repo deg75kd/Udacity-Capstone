@@ -6,6 +6,7 @@ import pickle
 from flask import render_template, request
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
+from sklearn.externals import joblib
 
 from scripts.graphs import return_figures
 from scripts.ml_graphs import return_ml_figures
@@ -75,9 +76,10 @@ def mldata():
         mldata.html page
     """
     # load ML model
-    file = open(model_pkl, 'rb')
-    model = pickle.load(file)
-    file.close()
+    # file = open(model_pkl, 'rb')
+    # model = pickle.load(file)
+    # file.close()
+    model = joblib.load(model_pkl)
 
     best_score = np.round(model.best_score_, 3)
     refit_time = np.round(model.refit_time_ / 60, 0)

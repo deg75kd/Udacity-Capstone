@@ -53,10 +53,10 @@ def apply_model(pickle_file, text):
     Returns:
         classification_label (string): predicted label
     """
-    # model = joblib.load(pickle_file)
-    file = open(pickle_file, 'rb')
-    model = pickle.load(file)
+    model = joblib.load(pickle_file)
+    # file = open(pickle_file, 'rb')
+    # model = pickle.load(file)
     classification_label = model.predict([text])[0]
-    file.close()
+    # file.close()
     
     return classification_label

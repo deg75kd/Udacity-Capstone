@@ -28,6 +28,7 @@ This project presents my efforts to categorize song lyrics using Data Science.  
 * requirements.txt - Package requirements to be installed on Heroku
 
 * data/classifier.pkl - Machine learning model
+* data/classifier_sm.pkl - Machine learning model using 10,000 rows (due to memory constraints)
 * data/cls_report.pkl - Classification report
 * data/cnf_df.pkl - Confusion matrix
 * data/lyrics.csv - CSV with original data

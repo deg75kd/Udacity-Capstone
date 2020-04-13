@@ -14,7 +14,8 @@ from scripts.search_song import search_song
 from scripts.myfunctions import remove_stop_words
 from scripts.song_results import get_song, apply_model
 
-model_pkl = "./data/classifier.pkl"
+# model_pkl = "./data/classifier.pkl"
+model_pkl = "./data/classifier_sm.pkl"
 cnf_matrix_pkl = "./data/cnf_df.pkl"
 cls_report_pkl = "./data/cls_report.pkl"
 
@@ -75,16 +76,6 @@ def mldata():
     Returns:
         mldata.html page
     """
-    # load ML model
-    # file = open(model_pkl, 'rb')
-    # model = pickle.load(file)
-    # file.close()
-    model = joblib.load(model_pkl)
-
-    best_score = np.round(model.best_score_, 3)
-    refit_time = np.round(model.refit_time_ / 60, 0)
-    # cv_results_df = pd.DataFrame(model.cv_results_)
-
     # load classification report
     file = open(cls_report_pkl, 'rb')
     cls_report = pickle.load(file)
@@ -102,8 +93,6 @@ def mldata():
     return render_template('mldata.html',
                            ids=ids,
                            figuresJSON=figuresJSON,
-                           best_score = best_score,
-                           refit_time = refit_time,
                            cls_report = cls_report
     )
 

@@ -37,7 +37,7 @@ This project presents my efforts to categorize song lyrics using Data Science.  
 
 * myapp/__init__.py - Runs the Flask web application
 * myapp/routes.py - Renders the web pages
-* myapp/static/* - CSS and JavaScript files for the Bootstrap template
+* myapp/static/* - CSS, JavaScript and image files for the Bootstrap template
 * myapp/templates/capstone.html - Home web page for the capstone project
 * myapp/templates/eda.html - Web page discussing exploratory data analysis
 * myapp/templates/go.html - Web page called when a search is executed
@@ -52,6 +52,9 @@ This project presents my efforts to categorize song lyrics using Data Science.  
 * scripts/process_data.py - Pulls data from the CSV, cleans it and saves to a PostgreSQL database
 * scripts/search_song.py - Performs user search for a song
 * scripts/song_results.py - Applys the ML model to the search
+
+* myapp/templates/Chicago Restaurant Recommender System.html - HTML export of a Jupyter notebook
+* myapp/templates/Recommendations_with_IBM.html - HTML export of a Jupyter notebook
 
 ## Prerequisites
 

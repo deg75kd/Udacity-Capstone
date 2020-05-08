@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <title>Data Science Portfolio - Kevin DeJesus</title>
+  </head>
+
+  <body>
+    <!--navbar links-->     
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+       <a class="navbar-brand" href="#">Kevin DeJesus</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" 
+      data-target="#navbarSupportedContent" 
+      aria-controls="navbarSupportedContent" aria-expanded="false" 
+      aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/index">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/capstone">Song Lyrics Predictor</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/recibm">IBM Recommendations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://deg75kd-wb.herokuapp.com/">WorldBank Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/coursera">Restaurant Recommender</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://medium.com/@kevin.dejesus/opportunities-for-airbnb-hosts-in-chicago-c2e68fea5c0f">Airbnb Hosts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.kaggle.com/dejesuska/titantic-v1">Titanic Project</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-10">
+          <h1>Data Science Portfolio</h1>
+          <p class="lead">My name is <a href="mailto:kevin.dejesus@gmail.com">Kevin DeJesus</a>, and I aspire to be a data scientist.  For the past 9 years I have worked as a database administrator.  In the summer of 2018 I started researching other data-related opportunities and was immediately drawn to data science.  I have now completed 2 online courses with Coursera and Udacity.  Those courses and independent study have helped me build the skills and knowledge to complete the following projects.  As I continue to grow as a data scientist, I plan to add to my portfolio.</p>
+        </div>
+        <div class="col-2 align-middle">
+          <img src="/static/img/48002095.jpg" alt="me" class="img-thumbnail">
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-6 border-right">
+          <div class="row">
+            <div class="col-10">
+              <a href="/capstone">
+                Song Lyrics Genre Predictor
+              </a>
+              <p>This project presents my efforts to categorize song lyrics using data science.  First, I cleaned my data source and uploaded the results to a PostgreSQL database.  I performed some analysis on that data and created a few graphs.  Next I built a machine learning pipeline using natural language processing and a random forest classifier.  Then I connected to the ChartLyrics API to find lyrics of other songs.  Finally, I built a web site around it all to allow users to apply the model to their favorite songs.</p>
+            </div>
+            <div class="col-2">
+              <div class="row">
+                <div class="col-12">
+                  <a href="https://github.com/deg75kd/Udacity-Capstone">
+                    <img src="/static/img/githublogo.png" alt="GitHub Repository" class="img-thumbnail rounded-circle">
+                  </a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <a href="https://www.udacity.com/course/data-scientist-nanodegree--nd025">
+                    <img src="/static/img/udacity-282307.png" alt="Udacity Data Scientist Nanodegree" class="img-thumbnail rounded-circle">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row">
+            <div class="col-10">
+              <a href="/recibm">
+                IBM Recommendations
+              </a>
+              <p>In this Udacity assignment I was given real data from the IBM Watson Studio platform.  The end goal was to develop a recommendation system for users based on the articles they have read.  First I performed exploratory data analysis.  Then I created a way to provide rank-based recommendations.  Next I utilized user-user based collaborative filtering.  Finally, I tested matrix factorization and provided a conclusion.</p>
+            </div>
+            <div class="col-2">
+              <div class="row">
+                <div class="col-12">
+                  <a href="https://github.com/deg75kd/IBM-Recommendations">
+                    <img src="/static/img/githublogo.png" alt="GitHub Repository" class="img-thumbnail rounded-circle">
+                  </a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <a href="https://www.udacity.com/course/data-scientist-nanodegree--nd025">
+                    <img src="/static/img/udacity-282307.png" alt="Udacity Data Scientist Nanodegree" class="img-thumbnail rounded-circle">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-6 border-right">
+          <div class="row">
+            <div class="col-10">
+              <a href="/coursera">
+                Chicago Restaurant Recommender
+              </a>
+              <p>In this capstone project the only requirement was to use Foursquare's API to retrieve data.  I decided to build a recommendation engine for restaurants in Chicago.  I used a dataset from the city's website to determine neighborhood names and locations.  Then I used the API to build a list of restaurants and checked each venue for users who have visited.  Finally I built the recommender and mapped the results for a couple of users.</p>
+            </div>
+            <div class="col-2">
+              <div class="row">
+                <div class="col-12">
+                  <a href="https://github.com/deg75kd/IBM-Capstone">
+                    <img src="/static/img/githublogo.png" alt="GitHub Repository" class="img-thumbnail rounded-circle">
+                  </a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <a href="https://www.coursera.org/professional-certificates/ibm-data-science">
+                    <img src="/static/img/f76415d3d9779400d610a0f089f551e5.jpg" alt="IBM Data Science Professional Certificate" class="img-thumbnail rounded-circle">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row">
+            <div class="col-10">
+              <a href="https://deg75kd-wb.herokuapp.com/">
+                WorldBank Dashboard
+              </a>
+              <p>For this Udacity assignment I performed analysis on data from the World Bank and created several graphs detailing my findings.  Then I used to Flask, Plotly and Bootstap to deploy it as a web page hosted on Heroku.</p>
+            </div>
+            <div class="col-2">
+              <div class="row">
+                <div class="col-12">
+                  <a href="https://github.com/deg75kd/WorldBankDashboard">
+                    <img src="/static/img/githublogo.png" alt="GitHub Repository" class="img-thumbnail rounded-circle">
+                  </a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <a href="https://www.udacity.com/course/data-scientist-nanodegree--nd025">
+                    <img src="/static/img/udacity-282307.png" alt="Udacity Data Scientist Nanodegree" class="img-thumbnail rounded-circle">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-6 border-right">
+          <div class="row">
+            <div class="col-10">
+              <a href="https://medium.com/@kevin.dejesus/opportunities-for-airbnb-hosts-in-chicago-c2e68fea5c0f">
+                Opportunities for Airbnb Hosts in Chicago
+              </a>
+              <p>In this Medium blog post I explain my efforts to analyze Airbnb data from the city of Chicago.  First I explored the data to answer a couple of questions for property owners looking to become hosts.  Then I applied linear regression to the dataset to predict prices.  Unfortunately, the results were very poor.  This project would be a good candidate to revisit in the future.</p>
+            </div>
+            <div class="col-2">
+              <div class="row">
+                <div class="col-12">
+                  <a href="https://github.com/deg75kd/UdacityBlogPost">
+                    <img src="/static/img/githublogo.png" alt="GitHub Repository" class="img-thumbnail rounded-circle">
+                  </a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <a href="https://www.udacity.com/course/data-scientist-nanodegree--nd025">
+                    <img src="/static/img/udacity-282307.png" alt="Udacity Data Scientist Nanodegree" class="img-thumbnail rounded-circle">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row">
+            <div class="col-10">
+              <a href="https://www.kaggle.com/dejesuska/titantic-v1">
+                Kaggle Titanic Project
+              </a>
+              <p>In this notebook I used machine learning techniques to predict the survival of passengers on the Titanic. First I explored the data and prepared it for use by the machine learning models. Then I tested several classifiers and used cross validation to determine the model with the best accuracy. Finally, I appled the best performing model to the test dataset to get predictions.</p>
+            </div>
+            <div class="col-2">
+              <div class="row">
+                <div class="col-12">
+                  <a href="https://www.kaggle.com/">
+                    <img src="/static/img/189_Kaggle_logo_logos-512.png" alt="Kaggle" class="img-thumbnail rounded-circle">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- /container -->
+  
+  </body>
+</html>

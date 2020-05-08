@@ -19,18 +19,18 @@ model_pkl = "./data/classifier_sm.pkl"
 cnf_matrix_pkl = "./data/cnf_df.pkl"
 cls_report_pkl = "./data/cls_report.pkl"
 
-# @app.route('/')
-# @app.route('/index')
-# def jumbotron():
-    # """Render the main portfolio page
+@app.route('/')
+@app.route('/index')
+def jumbotron():
+    """Render the main portfolio page
 
-    # Args:
-        # None
+    Args:
+        None
 
-    # Returns:
-        # index.html page
-    # """
-    # return render_template('index.html')
+    Returns:
+        index.html page
+    """
+    return render_template('index.html')
 
 @app.route('/capstone')
 def capstone():
@@ -163,3 +163,27 @@ def results_page():
                            artist = artist,
                            song = song
     )
+
+@app.route('/recibm')
+def recibm():
+    """Render the page for recommendations with IBM
+
+    Args:
+        None
+
+    Returns:
+        Recommendations_with_IBM.html page
+    """
+    return render_template('Recommendations_with_IBM.html')
+
+@app.route('/coursera')
+def coursera():
+    """Render the page for my Coursera capstone project
+
+    Args:
+        None
+
+    Returns:
+        Chicago Restaurant Recommender System.html page
+    """
+    return render_template('Chicago Restaurant Recommender System.html')
